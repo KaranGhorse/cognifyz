@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Karan | Portfolio - Cognifyz Task 3</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: #0f172a;
+        color: white;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: linear-gradient(135deg, #1e3a8a, #020617);
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .section-title {
+        border-bottom: 2px solid orange;
+        display: inline-block;
+        margin-bottom: 30px;
+      }
+
+      .card {
+        background: #020617;
+        border: none;
+        transition: 0.4s;
+        color: rgb(192, 192, 192);
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px #0a1a43;
+      }
+
+      .btn-custom {
+        background: orange;
+        border: none;
+        color: black;
+      }
+
+      .btn-custom:hover {
+        background: #ff7b00;
+      }
+
+      footer {
+        background: #020617;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+      <div class="container">
+        <a class="navbar-brand">Karan Ghorse</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <h1>Hi, I'm <span style="color: orange">Karan</span></h1>
+        <p class="lead">MERN Stack Developer</p>
+        <p>
+          This portfolio website is created under
+          <b>Cognifyz Internship – Task 3</b>
+        </p>
+        <a href="#about" class="btn btn-custom mt-3 px-4 py-2">Explore</a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="container py-5">
+      <h2 class="section-title">About Me</h2>
+      <p>
+        I am a passionate MERN Stack Developer focused on building responsive and interactive web applications. I enjoy creating clean, user-friendly interfaces and writing efficient, scalable code.
+
+This project demonstrates advanced CSS styling techniques, smooth animations, and a fully responsive layout using the Bootstrap framework. It reflects my understanding of modern UI/UX principles, mobile-first design, and my ability to develop visually appealing and functional web solutions.
+
+Through this project, I aimed to showcase not only my technical skills but also my attention to design, performance, and user experience.
+      </p>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="container py-5">
+      <h2 class="section-title">Skills</h2>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card p-4">
+            <h5>Frontend</h5>
+            <p>HTML, CSS, JavaScript, Bootstrap, Tailwind, React, React-Native, Redux</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card p-4">
+            <h5>Backend</h5>
+            <p>Node.js, Express, MongoDB</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card p-4">
+            <h5>Tools</h5>
+            <p>Git, GitHub, VS Code, AWS, Postman, Cloaudinary, Socket.io</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECT -->
+    <section class="container py-5">
+      <h2 class="section-title">Task Project</h2>
+
+      <div class="card p-4">
+        <h5>Cognifyz Internship Task 3</h5>
+        <p>
+          This project is built using advanced CSS effects, animations,
+          transitions and Bootstrap responsive framework. It includes multiple
+          sections and works perfectly on all screen sizes.
+        </p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-center p-4">
+      © 2025 | Karan Ghorse | Cognifyz Internship Task 3
+    </footer>
+  </body>
+</html>

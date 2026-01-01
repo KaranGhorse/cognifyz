@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task 2 - Cognifyz</title>
+  </head>
+  <style>
+
+    #email{
+        width:100%;
+        padding:8px;
+    }
+  </style>
+  <body style="font-family: Arial; background: #f2f2f2">
+    <h2 style="text-align: center">User Registration</h2>
+
+    <form
+      action="/submit"
+      method="POST"
+      onsubmit="return validateForm()"
+      style="
+        width: 300px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+      "
+    >
+      <label>Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        style="width: 100%; padding: 8px"
+      /><br /><br />
+
+      <label>Email:</label>
+      <input type="text" id="email" name="email" /><br /><br />
+
+      <label>Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        style="width: 100%; padding: 8px"
+      /><br /><br />
+
+      <button
+        type="submit"
+        style="width: 100%; padding: 10px; background: green; color: white"
+      >
+        Submit
+      </button>
+    </form>
+
+    <script>
+      function validateForm() {
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let pass = document.getElementById("password").value;
+
+        if (name == "" || email == "" || pass == "") {
+          alert("All fields required");
+          return false;
+        }
+
+        if (pass.length < 6) {
+          alert("Password must be at least 6 characters");
+          return false;
+        }
+
+        return true;
+      }
+    </script>
+  </body>
+</html>

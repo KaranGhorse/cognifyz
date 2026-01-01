@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Get instant weather updates for any city with our modern and responsive weather app. Sign in with Google to start searching."
+    />
+    <meta
+      name="keywords"
+      content="weather app, city weather, google signin, responsive UI, modern weather, animated weather"
+    />
+    <meta name="author" content="AI Programmer" />
+    <title>Modern Weather App - Sign In & Search</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234285F4' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2z'/%3E%3Cpath fill='%23EA4335' d='M12 4c-4.41 0-8 3.59-8 8h2a6 6 0 0 1 6-6V4z'/%3E%3Cpath fill='%23FBBC05' d='M12 20c4.41 0 8-3.59 8-8h-2a6 6 0 0 1-6 6v2z'/%3E%3Cpath fill='%2334A853' d='M20 12c0 4.41-3.59 8-8 8v-2a6 6 0 0 0 6-6h2z'/%3E%3C/svg%3E"
+      type="image/svg+xml"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-bg-color: #f0f2f5;
+        --secondary-bg-color: #ffffff;
+        --text-color-dark: #333;
+        --text-color-light: #555;
+        --accent-color: #4caf50; /* Green */
+        --google-blue: #4285f4;
+        --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+        --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+        --border-radius-card: 16px;
+        --border-radius-input: 10px;
+        --transition-speed: 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.02);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #a8dadc, #457b9d);
+        background-size: 200% 200%;
+        animation: gradientShift 15s ease infinite;
+        color: var(--text-color-dark);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      #app-container {
+        background: var(--secondary-bg-color);
+        border-radius: var(--border-radius-card);
+        box-shadow: var(--shadow-medium);
+        padding: 40px;
+        max-width: 90%;
+        width: 500px;
+        text-align: center;
+        animation: fadeIn 0.8s ease-out;
+        transition: all var(--transition-speed);
+      }
+
+      @media (max-width: 768px) {
+        #app-container {
+          padding: 30px;
+          width: 95%;
+        }
+      }
+
+      h1 {
+        color: var(--text-color-dark);
+        margin-bottom: 30px;
+        font-size: 2.2em;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        animation: slideInUp 0.6s ease-out;
+      }
+
+      #google-signin-section,
+      #weather-app-section {
+        animation: fadeIn 0.7s ease-out;
+      }
+
+      #google-signin-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--google-blue);
+        color: #fff;
+        border: none;
+        border-radius: var(--border-radius-input);
+        padding: 12px 25px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color var(--transition-speed),
+          transform var(--transition-speed), box-shadow var(--transition-speed);
+        box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
+      }
+
+      #google-signin-btn:hover {
+        background-color: #357ae8;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(66, 133, 244, 0.4);
+      }
+
+      #google-signin-btn img {
+        margin-right: 10px;
+        width: 24px;
+        height: 24px;
+      }
+
+      #search-form {
+        display: flex;
+        margin-bottom: 25px;
+        gap: 10px;
+      }
+
+      #city-input {
+        flex-grow: 1;
+        padding: 12px 20px;
+        border: 1px solid #ddd;
+        border-radius: var(--border-radius-input);
+        font-size: 1em;
+        outline: none;
+        transition: border-color var(--transition-speed),
+          box-shadow var(--transition-speed);
+        color: var(--text-color-dark);
+      }
+
+      #city-input:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+      }
+
+      #search-button {
+        background-color: var(--accent-color);
+        color: #fff;
+        border: none;
+        border-radius: var(--border-radius-input);
+        padding: 12px 25px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color var(--transition-speed),
+          transform var(--transition-speed), box-shadow var(--transition-speed);
+        box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+      }
+
+      #search-button:hover {
+        background-color: #43a047;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4);
+      }
+
+      #weather-display {
+        background: var(--primary-bg-color);
+        border-radius: var(--border-radius-card);
+        padding: 25px;
+        margin-top: 25px;
+        text-align: left;
+        box-shadow: var(--shadow-light);
+        animation: fadeIn 0.8s ease-out;
+        display: none; /* Hidden by default */
+      }
+
+      #weather-display.active {
+        display: block;
+      }
+
+      #weather-city-name {
+        font-size: 2em;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--text-color-dark);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      #weather-details {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .weather-main-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex: 1 1 50%;
+        min-width: 200px;
+      }
+
+      #weather-icon {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        animation: pulse 2s infinite ease-in-out;
+      }
+
+      #temperature {
+        font-size: 3.5em;
+        font-weight: 700;
+        color: var(--text-color-dark);
+        line-height: 1;
+      }
+
+      #description {
+        font-size: 1.3em;
+        text-transform: capitalize;
+        color: var(--text-color-light);
+        margin-top: 5px;
+      }
+
+      .weather-info-grid {
+        flex: 1 1 40%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        min-width: 150px;
+        text-align: right;
+      }
+
+      .weather-info-grid p {
+        margin: 0;
+        font-size: 0.95em;
+        color: var(--text-color-light);
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 5px;
+      }
+      .weather-info-grid p strong {
+        color: var(--text-color-dark);
+        font-weight: 600;
+      }
+      .weather-info-grid p span {
+        font-size: 1.2em;
+        line-height: 1;
+      }
+
+      #error-message {
+        color: #d9534f;
+        margin-top: 20px;
+        font-weight: 500;
+        animation: fadeIn 0.5s ease-out;
+        display: none;
+      }
+
+      #loading-spinner {
+        display: none;
+        margin: 20px auto;
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-top: 4px solid var(--accent-color);
+        border-radius: 50%;
+        animation: rotate 0.8s linear infinite;
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 1.8em;
+        }
+        #app-container {
+          padding: 20px;
+        }
+        #search-form {
+          flex-direction: column;
+        }
+        #search-button {
+          width: 100%;
+        }
+        .weather-main-info,
+        .weather-info-grid {
+          flex-basis: 100%;
+          text-align: center;
+          justify-content: center;
+        }
+        .weather-info-grid p {
+          justify-content: center;
+        }
+        #temperature {
+          font-size: 3em;
+        }
+        #weather-icon {
+          width: 60px;
+          height: 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app-container">
+      <h1 id="app-title">WeatherWise</h1>
+
+      <section id="google-signin-section">
+        <p>Sign in with Google to get instant weather updates.</p>
+        <button id="google-signin-btn">
+          <img
+            src="https://img.icons8.com/color/48/000000/google-logo.png"
+            alt="Google logo"
+          />
+          Sign in with Google
+        </button>
+      </section>
+
+      <section id="weather-app-section" style="display: none">
+        <form id="search-form">
+          <input
+            type="text"
+            id="city-input"
+            placeholder="Enter city name, e.g., London"
+            required
+            aria-label="City Name"
+          />
+          <button type="submit" id="search-button">Search</button>
+        </form>
+
+        <div id="loading-spinner"></div>
+        <p id="error-message" role="alert" aria-live="assertive"></p>
+
+        <div id="weather-display">
+          <h2 id="weather-city-name" aria-live="polite"></h2>
+          <div id="weather-details">
+            <div class="weather-main-info">
+              <img
+                id="weather-icon"
+                src=""
+                alt="Weather icon"
+                aria-hidden="true"
+              />
+              <div>
+                <p id="temperature" aria-label="Current temperature"></p>
+                <p id="description" aria-label="Weather description"></p>
+              </div>
+            </div>
+            <div class="weather-info-grid">
+              <p><span>💧</span> Humidity: <strong id="humidity"></strong></p>
+              <p><span>💨</span> Wind: <strong id="wind-speed"></strong></p>
+              <p>
+                <span>🌡️</span> Feels Like: <strong id="feels-like"></strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      const GOOGLE_SIGNIN_URL = "http://localhost:5000/auth/google";
+      const WEATHER_API_BASE_URL = "http://localhost:5000/api/weather/";
+
+      const appContainer = document.getElementById("app-container");
+      const googleSigninSection = document.getElementById(
+        "google-signin-section"
+      );
+      const weatherAppSection = document.getElementById("weather-app-section");
+      const googleSigninBtn = document.getElementById("google-signin-btn");
+      const searchForm = document.getElementById("search-form");
+      const cityInput = document.getElementById("city-input");
+      const searchButton = document.getElementById("search-button");
+      const weatherDisplay = document.getElementById("weather-display");
+      const weatherCityName = document.getElementById("weather-city-name");
+      const weatherIcon = document.getElementById("weather-icon");
+      const temperature = document.getElementById("temperature");
+      const description = document.getElementById("description");
+      const humidity = document.getElementById("humidity");
+      const windSpeed = document.getElementById("wind-speed");
+      const feelsLike = document.getElementById("feels-like");
+      const errorMessage = document.getElementById("error-message");
+      const loadingSpinner = document.getElementById("loading-spinner");
+
+      function setLoggedInState(isLoggedIn) {
+        localStorage.setItem("isLoggedIn", isLoggedIn);
+        if (isLoggedIn) {
+          googleSigninSection.style.display = "none";
+          weatherAppSection.style.display = "block";
+          appContainer.style.maxWidth = "600px";
+          appContainer.style.width = "600px";
+        } else {
+          googleSigninSection.style.display = "block";
+          weatherAppSection.style.display = "none";
+          appContainer.style.maxWidth = "500px";
+          appContainer.style.width = "500px";
+        }
+      }
+
+      // Handle Google Sign-in button click
+      googleSigninBtn.addEventListener("click", () => {
+        window.location.href = GOOGLE_SIGNIN_URL;
+      });
+
+      // Fetch weather data
+      async function fetchWeather(city) {
+        errorMessage.style.display = "none";
+        weatherDisplay.classList.remove("active");
+        loadingSpinner.style.display = "block";
+        searchButton.disabled = true;
+        cityInput.disabled = true;
+
+        try {
+          const response = await axios.get(`${WEATHER_API_BASE_URL}${city}`);
+          const data = response.data;
+            console.log(data);
+            
+          if (response.status === 200 && data.success && data.weather) {
+            const weather = data.weather;
+
+            weatherCityName.textContent = weather.city;
+            temperature.innerHTML = `${Math.round(weather.temperature)}&deg;C`;
+            description.textContent = weather.condition;
+            humidity.textContent = `${weather.humidity}%`;
+            windSpeed.textContent = `${weather.windSpeed} m/s`;
+
+            weatherDisplay.classList.add("active");
+          } else {
+            errorMessage.textContent =
+              data.message ||
+              "Could not retrieve weather data. Please try again.";
+            errorMessage.style.display = "block";
+          }
+        } catch (error) {
+          console.error("Error fetching weather:", error);
+          if (error.response && error.response.status === 404) {
+            errorMessage.textContent =
+              "City not found. Please check the spelling.";
+          } else {
+            errorMessage.textContent =
+              "Failed to fetch weather data. Please try again later.";
+          }
+          errorMessage.style.display = "block";
+        } finally {
+          loadingSpinner.style.display = "none";
+          searchButton.disabled = false;
+          cityInput.disabled = false;
+        }
+      }
+
+      // Handle search form submission
+      searchForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const city = cityInput.value.trim();
+        if (city) {
+          console.log(city);
+
+          fetchWeather(city);
+        } else {
+          errorMessage.textContent = "Please enter a city name.";
+          errorMessage.style.display = "block";
+        }
+      });
+
+      async function checkLogin() {
+        const res = await fetch("/auth/user");
+        const user = await res.json();
+
+        if (user) {
+          setLoggedInState(true);
+        } else {
+          const isLoggedInLocalStorage =
+            localStorage.getItem("isLoggedIn") === "true";
+          setLoggedInState(isLoggedInLocalStorage);
+        }
+      }
+
+      checkLogin();
+    </script>
+  </body>
+</html>

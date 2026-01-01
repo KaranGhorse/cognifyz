@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Secure Access</title>
+    <meta name="description" content="Secure login page for accessing your account.">
+    <meta name="keywords" content="login, account, secure, sign in, user, access">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles & Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary-color: #6a0572; /* Deep Violet */
+            --primary-dark: #4b0351;
+            --accent-color: #fca311; /* Vibrant Orange */
+            --text-color-dark: #333;
+            --text-color-light: #f9f9f9;
+            --background-gradient-start: #e0f2f7; /* Light Blue */
+            --background-gradient-end: #f4e7f9;   /* Light Purple */
+            --card-background: #ffffff;
+            --input-border-color: #ddd;
+            --focus-glow: rgba(106, 5, 114, 0.3); /* Primary color with transparency */
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background: linear-gradient(135deg, var(--background-gradient-start) 0%, var(--background-gradient-end) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow: hidden; /* Prevent scrollbar from initial animation */
+        }
+
+        .login-container {
+            background-color: var(--card-background);
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        h1 {
+            color: var(--primary-dark);
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color-dark);
+            font-size: 0.95rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--input-border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            color: var(--text-color-dark);
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .input-field::placeholder {
+            color: #b0b0b0;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px var(--focus-glow);
+            background-color: var(--card-background);
+        }
+
+        .options-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .remember-me input[type="checkbox"] {
+            margin-right: 8px;
+            accent-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 15px 20px;
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 20px rgba(106, 5, 114, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .login-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(106, 5, 114, 0.4);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(106, 5, 114, 0.2);
+        }
+
+        .login-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease-out, height 0.4s ease-out, opacity 0.4s ease-out;
+            z-index: 0;
+        }
+
+        .login-button:active::after {
+            width: 150%;
+            height: 150%;
+            opacity: 1;
+            transition: 0s;
+        }
+
+        .signup-link {
+            margin-top: 30px;
+            font-size: 0.95rem;
+            color: var(--text-color-dark);
+        }
+
+        .signup-link a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        .signup-link a:hover {
+            color: #e69100;
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 30px 25px;
+                border-radius: 10px;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            .input-field {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+
+            .login-button {
+                padding: 13px 18px;
+                font-size: 1rem;
+            }
+
+            .options-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .login-container {
+                padding: 25px 20px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="login-container">
+            <h1>Create an accont</h1>
+            <form id="loginForm" aria-labelledby="login-heading">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="username" class="input-field" placeholder="john doe" required >
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="input-field" placeholder="your.email@example.com" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="input-field" placeholder="Enter your password" required autocomplete="current-password">
+                </div>
+                
+                <button type="submit" class="login-button">Signup</button>
+            </form>
+            <p class="signup-link">
+                Already have an account? <a href="/login.html">Login</a>
+            </p>
+        </section>
+    </main>
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('loginForm');
+
+            loginForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const username = document.getElementById('name').value;
+                if (email === '' || password === '') {
+                    alert('Please fill in both email and password fields.');
+                    return;
+                }
+
+                console.log('Login Attempt:');
+                console.log('Email:', email);
+                console.log('Password:', '********');
+
+                const loginButton = document.querySelector('.login-button');
+                const originalButtonText = loginButton.textContent;
+                loginButton.textContent = 'Logging in...';
+                loginButton.disabled = true;
+
+                axios.post('http://localhost:5000/api/user/register', {
+                    username: username,
+                    email: email,
+                    password: password
+                })
+                .then(response => {
+                    alert('Registration successful!');
+                    console.log(response.data);
+                    window.location.href = '/login.html';
+                })
+                .catch(error => {
+                    alert('Error during registration. Please try again.');
+                    console.error(error);
+                })
+                .finally(() => {
+                    loginButton.textContent = originalButtonText;
+                    loginButton.disabled = false;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

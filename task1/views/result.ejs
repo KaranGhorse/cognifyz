@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submission Successful</title>
+  <style>
+    /* Pure CSS for styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Nice gradient background */
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .success-icon {
+      color: #28a745;
+      font-size: 50px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .info-box {
+      background-color: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    .info-box p {
+      margin: 5px 0;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .info-box strong {
+      color: #333;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #764ba2;
+      color: white;
+      text-decoration: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #5a3780;
+    }
+
+    /* Simple Fade In Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="success-icon">✔</div>
+    
+    <h2>Awesome!</h2>
+    <p style="color: #666;">Your form has been submitted.</p>
+
+    <div class="info-box">
+      <p><strong>Name:</strong> <%= name %></p>
+      <p><strong>Email:</strong> <%= email %></p>
+    </div>
+
+    <a href="/" class="btn">Go Back Home</a>
+  </div>
+
+</body>
+</html>
