@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <style>
+        body {
+            background: #0f172a;
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            width: 360px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .success { color: #22c55e; }
+        .error { color: #ef4444; }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #38bdf8;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2 id="title"></h2>
+    <p id="message"></p>
+    <p id="email"></p>
+
+    <a href="/">Go Back</a>
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get("status");
+
+    const title = document.getElementById("title");
+    const message = document.getElementById("message");
+    const email = document.getElementById("email");
+
+    if (status === "success") {
+        title.innerText = "Form Submitted Successfully";
+        title.className = "success";
+        message.innerText = "Name: " + params.get("name");
+        email.innerText = "Email: " + params.get("email");
+    } else {
+        title.innerText = "Submission Failed";
+        title.className = "error";
+        message.innerText = params.get("msg");
+    }
+</script>
+
+</body>
+</html>
